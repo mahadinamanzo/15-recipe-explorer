@@ -45,3 +45,20 @@ HTTP API with explicit request/response semantics. Use a Server Action for
 mutations invoked by the app UI, such as submitting a form; it can validate and
 authorize the operation on the server and revalidate affected data without
 turning the mutation into a general-purpose GET endpoint.
+
+## Favourites and random recipes
+
+Favourites are stored as a validated JSON array of meal IDs in the
+`recipe-favorites` httpOnly cookie, capped at 50. The favourites page reads the
+cookie on the server and loads saved recipes concurrently. The limit behavior
+is a browser-local setting: reject new saves at capacity, or remove the oldest
+saved recipe to make room. Favorite buttons load their initial state through a
+Server Action, so category pages can remain statically generated. The random
+recipe route uses TheMealDB's random lookup without caching the request.
+
+## Deploy to Vercel
+
+Import the repository into a Vercel project and deploy with the detected
+Next.js settings. No API key or environment variable is required for the
+public TheMealDB endpoints. Verify the production build and test favourites in
+the deployed browser, since favourites are stored per-browser in a cookie.

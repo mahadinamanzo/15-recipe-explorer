@@ -12,7 +12,8 @@ export default async function RelatedMeals({
     await new Promise((resolve) => setTimeout(resolve, 1_000));
   }
 
-  const meals = (await getMealsByCategory(category))
+  const categoryMeals = await getMealsByCategory(category);
+  const meals = categoryMeals
     .filter((meal) => meal.idMeal !== currentMealId)
     .slice(0, 3);
 

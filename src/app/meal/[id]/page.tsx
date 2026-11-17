@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import IngredientsChecklist from "@/components/IngredientsChecklist";
+import FavoriteButton from "@/components/FavoriteButton";
 import Skeleton from "@/components/Skeleton";
 import { getMeal } from "@/lib/mealdb";
 import RelatedMeals from "./RelatedMeals";
@@ -102,6 +103,9 @@ export default async function MealPage({ params }: MealPageProps) {
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
             {meal.strMeal}
           </h1>
+          <div className="mt-4">
+            <FavoriteButton mealId={meal.idMeal} />
+          </div>
           <div className="mt-5 flex flex-wrap gap-2">
             {meal.strArea && (
               <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-sm text-emerald-950">

@@ -127,3 +127,9 @@ export async function getMeal(id: string): Promise<Meal | null> {
   const meal = data.meals?.[0];
   return meal ? normaliseMeal(meal) : null;
 }
+
+export async function getRandomMeal(): Promise<Meal | null> {
+  const data = await fetchMealDb<MealDbMealsResponse>("random.php", 0);
+  const meal = data.meals?.[0];
+  return meal ? normaliseMeal(meal) : null;
+}
