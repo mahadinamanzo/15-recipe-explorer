@@ -25,6 +25,7 @@ export interface Meal extends MealSummary {
   strCategory: string;
   strInstructions: string;
   strYoutube: string | null;
+  tags: string[];
   ingredients: Ingredient[];
 }
 
@@ -41,6 +42,7 @@ interface MealDbMeal extends MealSummary {
   strCategory?: string | null;
   strInstructions?: string | null;
   strYoutube?: string | null;
+  strTags?: string | null;
   [key: `strIngredient${number}`]: string | null | undefined;
   [key: `strMeasure${number}`]: string | null | undefined;
 }
@@ -77,6 +79,10 @@ function normaliseMeal(meal: MealDbMeal): Meal {
     strCategory: meal.strCategory ?? "",
     strInstructions: meal.strInstructions ?? "",
     strYoutube: meal.strYoutube ?? null,
+    tags: meal.strTags
+      ?.split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean) ?? [],
     ingredients,
   };
 }
