@@ -30,3 +30,18 @@ finish. The fallback communicates that more content is on its way, improving
 perceived performance without changing how long the related API request takes.
 In development, recommendations wait an extra second so the streaming state is
 easy to observe; production requests do not include that delay.
+
+## Search and server entry points
+
+The `/search?q=...` page is rendered by a Server Component, so results can be
+loaded directly through `searchMeals` without an extra HTTP request. The query
+is kept in the URL for sharing and bookmarking. The header autocomplete uses
+`/api/search`, a Route Handler that exposes JSON with HTTP status and
+`Cache-Control` headers to browser clients.
+
+Use a Server Component for data needed to render a page on the server. Use a
+Route Handler when a client, external service, or another application needs an
+HTTP API with explicit request/response semantics. Use a Server Action for
+mutations invoked by the app UI, such as submitting a form; it can validate and
+authorize the operation on the server and revalidate affected data without
+turning the mutation into a general-purpose GET endpoint.

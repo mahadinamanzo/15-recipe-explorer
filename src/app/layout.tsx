@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import HeaderSearch from "@/components/HeaderSearch";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,13 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <header className="border-b border-stone-200 bg-white">
-          <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+          <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-5">
             <Link href="/" className="text-xl font-bold tracking-tight">
               <span className="text-emerald-800">Recipe</span> Explorer
             </Link>
-            <span className="text-sm text-stone-500">
-              Find something delicious
-            </span>
+            <HeaderSearch />
           </nav>
         </header>
         {children}

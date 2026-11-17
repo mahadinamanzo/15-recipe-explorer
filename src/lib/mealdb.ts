@@ -15,6 +15,12 @@ export interface MealSummary {
   strMealThumb: string;
 }
 
+export interface MealSearchResult {
+  id: string;
+  name: string;
+  thumb: string;
+}
+
 export interface Ingredient {
   name: string;
   measure: string;
